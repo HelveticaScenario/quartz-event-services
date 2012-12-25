@@ -2,7 +2,10 @@
   "targets": [
     {
       "target_name": "hoverboard",
-      "sources": [ "src/hoverboard.mm", "src/event.mm" ]
+      "sources": [ 
+        "src/quartz-event-services.mm", 
+        "src/event.mm"
+      ]
     }
   ]
 }

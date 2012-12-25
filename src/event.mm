@@ -101,7 +101,6 @@ Handle<Value> Event::Post(const Arguments& args) {
   HandleScope scope;
 
   Event* event = ObjectWrap::Unwrap<Event>(args.This());
-  CGPoint point = CGEventGetLocation(event->raw_);
 
   CGEventPost(kCGHIDEventTap, event->raw_);
   CFRelease(event->raw_);
