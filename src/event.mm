@@ -21,6 +21,8 @@ void Event::Init(Handle<Object> target) {
       FunctionTemplate::New(SetType)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("setIntegerValueField"),
       FunctionTemplate::New(SetIntegerValueField)->GetFunction());
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("setLocation"),
+      FunctionTemplate::New(SetLocation)->GetFunction());
 
   Persistent<Function> constructor = Persistent<Function>::New(tpl->GetFunction());
 
@@ -45,6 +47,9 @@ CGEventType Event::TypeFromString(std::string str) {
 
   if (str == "leftMouseUp")
     return kCGEventLeftMouseUp;
+
+  if (str == "mouseMoved")
+    return kCGEventMouseMoved;
 
   return NULL;
 }
@@ -83,17 +88,24 @@ Handle<Value> Event::SetIntegerValueField(const Arguments& args) {
   return scope.Close(Undefined());
 }
 
+Handle<Value> Event::SetLocation(const Arguments& args) {
+  HandleScope scope;
+
+  Event* event = ObjectWrap::Unwrap<Event>(args.This());
+  CGPoint point = CGPointMake(args[0]->NumberValue(), args[1]->NumberValue());
+
+  CGEventSetLocation(event->raw_, point);
+
+  return scope.Close(Undefined());
+}
+
 Handle<Value> Event::Post(const Arguments& args) {
   HandleScope scope;
 
   Event* event = ObjectWrap::Unwrap<Event>(args.This());
   CGPoint point = CGEventGetLocation(event->raw_);
 
-  CGEventSetLocation(event->raw_, point);
   CGEventPost(kCGHIDEventTap, event->raw_);
-
-  NSLog(@"Location? x= %f, y = %f", (float)point.x, (float)point.y);
-
   CFRelease(event->raw_);
 
   return scope.Close(Undefined());
