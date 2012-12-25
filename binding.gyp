@@ -1,9 +1,9 @@
 {
   "targets": [
     {
-      "target_name": "quartz-event-services",
+      "target_name": "quartz_event_services",
       "sources": [ 
-        "src/quartz-event-services.mm", 
+        "src/quartz_event_services.mm",
         "src/event.mm"
       ]
     }

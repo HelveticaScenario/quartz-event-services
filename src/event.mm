@@ -12,7 +12,7 @@ Event::~Event() {};
 void Event::Init(Handle<Object> target) {
   Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
 
-  tpl->SetClassName(String::NewSymbol("event"));
+  tpl->SetClassName(String::NewSymbol("Event"));
   tpl->InstanceTemplate()->SetInternalFieldCount(1);
   tpl->PrototypeTemplate()->Set(String::NewSymbol("post"),
       FunctionTemplate::New(Post)->GetFunction());
@@ -25,7 +25,7 @@ void Event::Init(Handle<Object> target) {
 
   Persistent<Function> constructor = Persistent<Function>::New(tpl->GetFunction());
 
-  target->Set(String::NewSymbol("event"), constructor);
+  target->Set(String::NewSymbol("Event"), constructor);
 }
 
 Handle<Value> Event::New(const Arguments& args) {

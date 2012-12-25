@@ -7,4 +7,4 @@ void InitAll(Handle<Object> target) {
   Event::Init(target);
 }
 
-NODE_MODULE(hoverboard, InitAll)
+NODE_MODULE(quartz_event_services, InitAll)
