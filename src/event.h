@@ -19,4 +19,5 @@ class Event : public node::ObjectWrap {
     static CGEventType ValueFieldFromString(std::string str);
 
     CGEventRef raw_;
+    CGEventSourceRef source_;
 };

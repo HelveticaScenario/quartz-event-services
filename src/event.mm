@@ -31,7 +31,8 @@ Handle<Value> Event::New(const Arguments& args) {
   HandleScope scope;
 
   Event* event = new Event();
-  event->raw_ = CGEventCreate(NULL);
+  event->source_ = CGEventSourceCreate(kCGEventSourceStatePrivate);
+  event->raw_ = CGEventCreate(event->source_);
 
   event->Wrap(args.This());
 
