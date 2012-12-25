@@ -14,8 +14,9 @@ class Event : public node::ObjectWrap {
     static v8::Handle<v8::Value> New(const v8::Arguments& args);
     static v8::Handle<v8::Value> Post(const v8::Arguments& args);
     static v8::Handle<v8::Value> SetType(const v8::Arguments& args);
+    static v8::Handle<v8::Value> SetIntegerValueField(const v8::Arguments& args);
     static CGEventType TypeFromString(std::string str);
+    static CGEventType ValueFieldFromString(std::string str);
 
     CGEventRef raw_;
-    v8::Local<v8::String> type_;
 };

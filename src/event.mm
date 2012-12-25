@@ -19,6 +19,8 @@ void Event::Init(Handle<Object> target) {
       FunctionTemplate::New(Post)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("setType"),
       FunctionTemplate::New(SetType)->GetFunction());
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("setIntegerValueField"),
+      FunctionTemplate::New(SetIntegerValueField)->GetFunction());
 
   Persistent<Function> constructor = Persistent<Function>::New(tpl->GetFunction());
 
@@ -46,6 +48,13 @@ CGEventType Event::TypeFromString(std::string str) {
   return NULL;
 }
 
+CGEventType Event::ValueFieldFromString(std::string str) {
+  if (str == "mouseEventClickState")
+    return kCGMouseEventClickState;
+
+  return NULL;
+}
+
 Handle<Value> Event::SetType(const Arguments& args) {
   HandleScope scope;
 
@@ -55,6 +64,20 @@ Handle<Value> Event::SetType(const Arguments& args) {
   CGEventType type = Event::TypeFromString(*theString);
 
   CGEventSetType(event->raw_, type);
+
+  return scope.Close(Undefined());
+}
+
+
+Handle<Value> Event::SetIntegerValueField(const Arguments& args) {
+  HandleScope scope;
+
+  v8::String::Utf8Value theString(args[0]->ToString());
+
+  Event* event = ObjectWrap::Unwrap<Event>(args.This());
+  CGEventField field = Event::TypeFromString(*theString);
+
+  CGEventSetIntegerValueField(event->raw_, field, args[0]->NumberValue());
 
   return scope.Close(Undefined());
 }
