@@ -78,7 +78,7 @@ Handle<Value> Event::SetIntegerValueField(const Arguments& args) {
   Event* event = ObjectWrap::Unwrap<Event>(args.This());
   CGEventField field = Event::TypeFromString(*theString);
 
-  CGEventSetIntegerValueField(event->raw_, field, args[0]->NumberValue());
+  CGEventSetIntegerValueField(event->raw_, field, args[1]->NumberValue());
 
   return scope.Close(Undefined());
 }
