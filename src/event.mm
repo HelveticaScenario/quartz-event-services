@@ -73,7 +73,6 @@ Handle<Value> Event::SetType(const Arguments& args) {
   return scope.Close(Undefined());
 }
 
-
 Handle<Value> Event::SetIntegerValueField(const Arguments& args) {
   HandleScope scope;
 
