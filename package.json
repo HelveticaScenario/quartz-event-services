@@ -1,0 +1,9 @@
+{
+  "name": "quartz-event-services",
+  "description": "Node module for interfacing with Apple's Quartz Event Services",
+  "version": "0.0.1",
+  "main": "quartz-event-services.js",
+  "dependencies": {
+    "bindings": "1.0"
+  }
+}
