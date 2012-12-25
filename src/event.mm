@@ -1,4 +1,3 @@
-#import <Foundation/Foundation.h>
 #import <ApplicationServices/ApplicationServices.h>
 
 #include <node.h>
