@@ -22,6 +22,8 @@ void Event::Init(Handle<Object> target) {
       FunctionTemplate::New(SetIntegerValueField)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("setLocation"),
       FunctionTemplate::New(SetLocation)->GetFunction());
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("getLocation"),
+      FunctionTemplate::New(GetLocation)->GetFunction());
 
   Persistent<Function> constructor = Persistent<Function>::New(tpl->GetFunction());
 
@@ -95,6 +97,19 @@ Handle<Value> Event::SetLocation(const Arguments& args) {
   CGEventSetLocation(event->raw_, point);
 
   return scope.Close(Undefined());
+}
+
+Handle<Value> Event::GetLocation(const Arguments& args) {
+  HandleScope scope;
+
+  Event* event = ObjectWrap::Unwrap<Event>(args.This());
+  CGPoint point = CGEventGetLocation(event->raw_);
+  Local<Object> coordinates = Object::New();
+
+  coordinates->Set(String::NewSymbol("x"), Integer::New(point.x));
+  coordinates->Set(String::NewSymbol("y"), Integer::New(point.y));
+
+  return scope.Close(coordinates);
 }
 
 Handle<Value> Event::Post(const Arguments& args) {
