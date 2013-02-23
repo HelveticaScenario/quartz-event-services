@@ -105,9 +105,11 @@ Handle<Value> Event::GetLocation(const Arguments& args) {
   Event* event = ObjectWrap::Unwrap<Event>(args.This());
   CGPoint point = CGEventGetLocation(event->raw_);
   Local<Object> coordinates = Object::New();
+  Local<Number> x = Number::New(point.x);
+  Local<Number> y = Number::New(point.y);
 
-  coordinates->Set(String::NewSymbol("x"), Integer::New(point.x));
-  coordinates->Set(String::NewSymbol("y"), Integer::New(point.y));
+  coordinates->Set(String::NewSymbol("x"), x);
+  coordinates->Set(String::NewSymbol("y"), y);
 
   return scope.Close(coordinates);
 }
