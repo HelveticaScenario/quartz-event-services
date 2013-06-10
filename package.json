@@ -1,7 +1,8 @@
 {
   "name": "quartz-event-services",
-  "description": "Node module for interfacing with Apple's Quartz Event Services",
+  "description": "Node module bindings for Apple's Quartz Event Services",
   "version": "0.1.0",
+  "author": "Zachary Adam Kaplan <razic@viralkitty.com>",
   "keywords": [
     "quartz",
     "event",
@@ -11,5 +12,10 @@
   "main": "quartz-event-services.js",
   "dependencies": {
     "bindings": "1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/razic/quartz-event-services.git"
+  },
+  "license": "MIT"
 }
